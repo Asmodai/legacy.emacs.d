@@ -2,10 +2,10 @@
 ;;;
 ;;; settings.el --- Various settings.
 ;;;
-;;; Time-stamp: <Saturday Jan 31, 2015 18:41:03 asmodai>
-;;; Revision:   5
+;;; Time-stamp: <22/12/28 19:41:11 asmodai>
+;;; Revision:   6
 ;;;
-;;; Copyright (c) 2013 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2013-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

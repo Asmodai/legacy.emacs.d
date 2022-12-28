@@ -2,10 +2,10 @@
 ;;;
 ;;; fixes.el --- Various fixes.
 ;;;
-;;; Time-stamp: <Saturday Jan 31, 2015 14:15:23 asmodai>
-;;; Revision:   1
+;;; Time-stamp: <22/12/28 19:40:47 asmodai>
+;;; Revision:   3
 ;;;
-;;; Copyright (c) 2015 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2015-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -46,5 +46,11 @@
            (not (fboundp 'font-lock-unfontify-buffer)))
   (defalias 'font-lock-unfontify-buffer 'ignore)
   (require 'font-lock))
+
+;;; Emacs 19 on NeXT lacks `custom-set-variables' sadly.
+(when (and (emacs-p)
+           (= emacs-major-version 19)
+           (not (fboundp 'custom-set-variables)))
+  (defalias 'custom-set-variables 'ignore))
 
 ;;; fixes.el ends here

@@ -2,10 +2,10 @@
 ;;;
 ;;; licenses.el --- Boilerplate license insertion
 ;;;
-;;; Time-stamp: <Sunday Feb 19, 2012 08:48:36 asmodai>
-;;; Revision:   10
+;;; Time-stamp: <22/12/28 19:39:51 asmodai>
+;;; Revision:   11
 ;;;
-;;; Copyright (c) 2005-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2005-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

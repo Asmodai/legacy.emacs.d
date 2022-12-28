@@ -2,10 +2,10 @@
 ;;;
 ;;; site-c-mode.el --- C mode hacks.
 ;;;
-;;; Time-stamp: <Monday Dec 23, 2013 19:58:51 asmodai>
-;;; Revision:   148
+;;; Time-stamp: <22/12/28 19:43:09 asmodai>
+;;; Revision:   163
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -87,14 +87,66 @@
 ;;;==================================================================
 ;;;{{{ Configure cc-mode:
 
-(when (emacs>=19-p)
-  
   ;;
   ;; Require some stuff.
-  (require 'cc-mode)
+(require 'cc-mode)
+(when (emacs>=22-p)
   (require 'align)
-  (require 'ppindent)
+  (require 'ppindent))
+
+;;;------------------------------------------------------------------
+;;;{{{ cc-mode hooks:
   
+(defun my-common-c-mode-hooks ()
+  (setq indent-tabs-mode nil
+        c-max-one-liner-length 80)
+  ;;
+  ;; Emacs 20
+  (when (or (emacs=20-p)
+            (emacs=21-p))
+    (turn-on-font-lock))
+  ;;
+  ;; Emacs 21
+  (when (emacs>=20-p)
+    (google-set-c-style)
+    (google-make-newline-indent)
+    (when (featurep 'company)
+      (company-mode 1))
+    (when (featurep 'highlight-parentheses)
+      (hi-parens-autopair))
+    (when (featurep 'srecode)
+      (srecode-minor-mode))
+    (when (featurep 'semantic)
+      (semantic-mode)
+      (ede-minor-mode 1))
+    (when (emacs>=21-p)
+      (eldoc-mode 1))
+    (indent-tabs-mode nil)
+    (c-toggle-auto-state 1)
+    (c-toggle-syntactic-indentation 1)
+    (c-toggle-electric-state 1)
+    (c-toggle-hungry-state 1)
+    (c-toggle-auto-hungry-state 1)
+    (c-toggle-auto-newline 1)
+    (when (emacs>=23-p)
+      (subword-mode 1))
+    (autopair-mode 1))
+  ;;
+  ;; Everything else.
+  (column-number-mode 1)
+  (show-paren-mode 1)
+  (maybe-font-lock-mode 1)
+  (auto-fill-mode 1)
+  (when (next-mach-p)
+    (configure-emacs-nextstep)))
+
+(add-hook 'c-mode-common-hook 'my-common-c-mode-hooks)
+  
+;;;}}}
+;;;------------------------------------------------------------------
+
+(when (emacs>=19-p)
+    
 ;;; ------------------------------------------------------------------
 ;;;{{{ Lining up expressions the Google way:
 
@@ -243,52 +295,13 @@ Suitable for inclusion in `c-offsets-alist'."
 ;;;------------------------------------------------------------------
 
 ;;;------------------------------------------------------------------
-;;;{{{ cc-mode hooks:
-  
-  (defun my-common-c-mode-hooks ()
-    (when (or (emacs=20-p)
-	      (emacs=21-p))
-      (turn-on-font-lock)
-      (font-lock-mode 1))
-    (setq indent-tabs-mode nil
-          c-max-one-liner-length 80)
-    (google-set-c-style)
-    (google-make-newline-indent)
-    (when (featurep 'company)
-      (company-mode 1))
-    (when (featurep 'highlight-parentheses)
-      (hi-parens-autopair))
-    (when (featurep 'srecode)
-      (srecode-minor-mode))
-    (when (featurep 'semantic)
-      (semantic-mode)
-      (ede-minor-mode 1))
-    (show-paren-mode 1)
-    (eldoc-mode 1)
-    (c-toggle-auto-state 1)
-    (c-toggle-syntactic-indentation 1)
-    (c-toggle-electric-state 1)
-    (c-toggle-hungry-state 1)
-    (c-toggle-auto-hungry-state 1)
-    (c-toggle-auto-newline 1)
-    (when (emacs>=23-p)
-      (subword-mode 1))
-    (autopair-mode 1)
-    (auto-fill-mode 1))
-  
-    (add-hook 'c-mode-common-hook 'my-common-c-mode-hooks)
-  
-;;;}}}
-;;;------------------------------------------------------------------
-
-;;;------------------------------------------------------------------
 ;;;{{{ Set up the semantic bovinator:
-
-    (when (featurep 'semantic)
-      (defun my-c-mode-cedet-hook ()
-        (local-set-key [(control tab)] 'semantic-ia-complete-symbol))
-      
-      (add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook))
+  
+  (when (featurep 'semantic)
+    (defun my-c-mode-cedet-hook ()
+      (local-set-key [(control tab)] 'semantic-ia-complete-symbol))
+    
+    (add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook))
     
 ;;;}}}
 ;;;------------------------------------------------------------------
@@ -296,91 +309,95 @@ Suitable for inclusion in `c-offsets-alist'."
 ;;;------------------------------------------------------------------
 ;;;{{{ Doxygen stuff:
 
-    (when (emacs>=23-p)
-      (require 'doc-mode)
-      (add-hook 'c-mode-common-hook 'doc-mode))
+  (when (emacs>=23-p)
+    (require 'doc-mode)
+    (add-hook 'c-mode-common-hook 'doc-mode))
 
 ;;;}}}
 ;;;------------------------------------------------------------------
 
-;;; ------------------------------------------------------------------
+;;;------------------------------------------------------------------
 ;;;{{{ Set up alignment:
 
-  ;;
-  ;; Clean up any existing stuff
-  (when (or (boundp 'align-exclude-key-list)
-            (boundp 'align-custom-rules-list))
-    (makunbound 'align-exclude-key-list)
-    (makunbound 'align-custom-rules-list))
+  ;; Only do this for newer Emacsen
+  (when (emacs>=20-p)
+
+    ;;
+    ;; Clean up any existing stuff
+    (when (or (boundp 'align-exclude-key-list)
+              (boundp 'align-custom-rules-list))
+      (makunbound 'align-exclude-key-list)
+      (makunbound 'align-custom-rules-list))
   
-  (defvar align-exclude-key-list '(c-variable-declaration
-                                   c-assignment))
+    (defvar align-exclude-key-list '(c-variable-declaration
+                                     c-assignment))
   
-  (defvar align-custom-rules-list
-    `((c-assignment
-       (regexp . ,(concat "[^-=!^&*+<>/| \t\n]\\(\\s-*[-=!^&*+<>/|]*\\)"
-                          "=\\(\\s-*\\)\\([^= \t\n]\\|$\\)"))
-       (group . (1 2))
-       (justify . t)
-       (modes . align-c++-modes))
-      (c-variable-declaration
-       (regexp . ,(concat "[*&0-9A-Za-z_]\\(?:\\s-*>\\)?[&*]*\\(\\s-+[*&]*\\)"
-                          "[A-Za-z_][0-9A-Za-z:_]*\\s-*\\(\\()\\|"
-                          "=[^=\n].*\\|(.*)\\|\\(\\[.*\\]\\)*\\)?"
-                          "\\s-*[;,]\\|)\\s-*$\\)"))
-       (group . 1)
-       (modes . align-c++-modes)
-       (justify . t)
-       (valid
-        . ,(function
-            (lambda ()
-             (not (or (save-excursion
-                        (goto-char (match-beginning 1))
-                        (backward-word 1)
-                        (looking-at
-                         "\\(goto\\|return\\|new\\|delete\\|throw\\)"))
-                      (if (and (boundp 'font-lock-mode)
-                               font-lock-mode)
-                          (eq (get-text-property (point) 'face)
-                              'font-lock-comment-face)
-                          (eq (caar (c-guess-basic-syntax)) 'c))))))))))
-  
-  (defvar cc-mode::align-mode-rules-list (append align-rules-list))
-  
-  (dolist (key align-exclude-key-list)
-    (setq cc-mode::align-mode-rules-list
-          (remove (assq key cc-mode::align-mode-rules-list)
-                  cc-mode::align-mode-rules-list)))
-  
-  (setq cc-mode::align-mode-rules-list
-        (append align-custom-rules-list
-                cc-mode::align-mode-rules-list))
-  
-  (add-hook 'c-mode-common-hook
-            '(lambda ()
-              (setq align-mode-rules-list
-               cc-mode::align-mode-rules-list)))
-  
-  (defun perform-c-alignment ()
-    (unless (or (eq (caar c-syntactic-context) 'c)
-                (eq (caar c-syntactic-context) 'topmost-intro)
-                (eq (caar c-syntactic-context) 'brace-list-close))
-      (save-excursion
-        (let ((place (if (and (listp (cadr c-syntactic-context))
-                              (not (null (cadr c-syntactic-context)))
-                              (not (null (cadadr c-syntactic-context))))
-                         (cadadr c-syntactic-context)
-                         (cadar c-syntactic-context)))
-              (saved-point (point)))
-          (if (not (null place))
-              (align place (point) "\\({$\\|^\\s-*}\\|^\\(\\s-*\\)$\\)"))))))
-  
-  (add-hook 'c-special-indent-hook 'perform-c-alignment)
+    (defvar align-custom-rules-list
+      `((c-assignment
+         (regexp . ,(concat "[^-=!^&*+<>/| \t\n]\\(\\s-*[-=!^&*+<>/|]*\\)"
+                            "=\\(\\s-*\\)\\([^= \t\n]\\|$\\)"))
+         (group . (1 2))
+         (justify . t)
+         (modes . align-c++-modes))
+        (c-variable-declaration
+         (regexp . ,(concat "[*&0-9A-Za-z_]\\(?:\\s-*>\\)?[&*]*\\(\\s-+[*&]*\\)"
+                            "[A-Za-z_][0-9A-Za-z:_]*\\s-*\\(\\()\\|"
+                            "=[^=\n].*\\|(.*)\\|\\(\\[.*\\]\\)*\\)?"
+                            "\\s-*[;,]\\|)\\s-*$\\)"))
+         (group . 1)
+         (modes . align-c++-modes)
+         (justify . t)
+         (valid
+          . ,(function
+              (lambda ()
+               (not (or (save-excursion
+                          (goto-char (match-beginning 1))
+                          (backward-word 1)
+                          (looking-at
+                           "\\(goto\\|return\\|new\\|delete\\|throw\\)"))
+                        (if (and (boundp 'maybe-font-lock-mode)
+                                 maybe-font-lock-mode)
+                            (eq (get-text-property (point) 'face)
+                                'font-lock-comment-face)
+                            (eq (caar (c-guess-basic-syntax)) 'c))))))))))
+    
+    (when (emacs>=22-p)
+      (defvar cc-mode::align-mode-rules-list (append align-rules-list))
+      
+      (dolist (key align-exclude-key-list)
+        (setq cc-mode::align-mode-rules-list
+              (remove (assq key cc-mode::align-mode-rules-list)
+                      cc-mode::align-mode-rules-list)))
+      
+      (setq cc-mode::align-mode-rules-list
+            (append align-custom-rules-list
+                    cc-mode::align-mode-rules-list))
+      
+      (add-hook 'c-mode-common-hook
+                '(lambda ()
+                  (setq align-mode-rules-list
+                   cc-mode::align-mode-rules-list))))
+    
+    (defun perform-c-alignment ()
+      (unless (or (eq (caar c-syntactic-context) 'c)
+                  (eq (caar c-syntactic-context) 'topmost-intro)
+                  (eq (caar c-syntactic-context) 'brace-list-close))
+        (save-excursion
+          (let ((place (if (and (listp (cadr c-syntactic-context))
+                                (not (null (cadr c-syntactic-context)))
+                                (not (null (cadadr c-syntactic-context))))
+                           (cadadr c-syntactic-context)
+                           (cadar c-syntactic-context)))
+                (saved-point (point)))
+            (if (not (null place))
+                (align place (point) "\\({$\\|^\\s-*}\\|^\\(\\s-*\\)$\\)"))))))
+    
+    (add-hook 'c-special-indent-hook 'perform-c-alignment))
   
 ;;;}}}
 ;;;------------------------------------------------------------------
   
-;;; ------------------------------------------------------------------
+;;;------------------------------------------------------------------
 ;;;{{{ Fix for C++11's `enum class':
   
   (defun inside-class-enum-p (pos)
@@ -408,13 +425,13 @@ Suitable for inclusion in `c-offsets-alist'."
     (add-to-list 'c-offsets-alist
                    '(statement-cont . align-enum-class-closing-brace)))
   
-  (add-hook 'c++-mode-hook 'fix-enum-class)
+  (when (emacs>=21-p)
+    (add-hook 'c++-mode-hook 'fix-enum-class))
 
 ;;;}}}
 ;;;------------------------------------------------------------------
 
-
-  )
+  )                                     ; when (emacs>=19-p)
 
 ;;;}}}
 ;;;==================================================================
@@ -433,5 +450,15 @@ Suitable for inclusion in `c-offsets-alist'."
 
 ;;;}}}
 ;;;==================================================================
+
+;;;==================================================================
+;;;{{{ Generic C mode hacks:
+
+(modify-syntax-entry ?_ "w" c-mode-syntax-table)
+
+;;;}}}
+;;;==================================================================
+
+
 
 ;;; site-c-mode.el ends here

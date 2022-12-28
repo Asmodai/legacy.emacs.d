@@ -2,10 +2,10 @@
 ;;;
 ;;; site-page-break-mode.el --- Page break handling
 ;;;
-;;; Time-stamp: <Monday Jan 30, 2012 00:09:47 asmodai>
-;;; Revision:   11
+;;; Time-stamp: <22/12/28 19:45:02 asmodai>
+;;; Revision:   12
 ;;;
-;;; Copyright (c) 2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2012-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

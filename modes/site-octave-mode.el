@@ -2,10 +2,10 @@
 ;;;
 ;;; site-octave-mode.el --- Support for GNU Octave.
 ;;;
-;;; Time-stamp: <Wednesday Sep  5, 2012 02:52:03 asmodai>
-;;; Revision:   7
+;;; Time-stamp: <22/12/28 19:44:53 asmodai>
+;;; Revision:   8
 ;;;
-;;; Copyright (c) 2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2012-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

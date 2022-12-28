@@ -2,10 +2,10 @@
 ;;;
 ;;; site-perl-mode.el --- Perl mode hacks.
 ;;;
-;;; Time-stamp: <Monday Jul 21, 2014 11:22:35 asmodai>
-;;; Revision:   22
+;;; Time-stamp: <22/12/28 19:45:08 asmodai>
+;;; Revision:   23
 ;;;
-;;; Copyright (c) 2005-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2005-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

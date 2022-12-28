@@ -2,10 +2,10 @@
 ;;;
 ;;; 19-extensions.el --- Emacs Lisp extensions for Emacs 19.
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 00:50:19 asmodai>
-;;; Revision:   3
+;;; Time-stamp: <22/12/28 19:38:16 asmodai>
+;;; Revision:   7
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -161,18 +161,19 @@ If `time' is not passed, then the function defaults to the value of
                  (/ absmin 60)
                  (% absmin 60)))))
 
-(defun time-zone-name (&optopnal time)
+(defun time-zone-name (&optional time)
   "Returns the name of the time zone of a given `time'.
 
 If `time' is not specified, then the function defaults to the value of
 `current-time'."
-  (cond ((fboundp 'current-time-zone)
-         (nth 1 (current-time-zone
-                 (if time
-                     time
-                     (current-time))))
-         ((getenv "TZ")
-          (substring (getenv "TZ") 0 3)))))
+  (let ((tz (getenv "TZ")))
+    (cond ((fboundp 'current-time-zone)
+           (nth 1 (current-time-zone
+                   (if time
+                       time
+                       (current-time)))))
+          ((not (null tz))
+           (substring tz 0 3)))))
 
 (defun format-time ()
   "Format the time in the RFC-822 format, e.g. \"Thu, 01 Jan 1970

@@ -2,10 +2,10 @@
 ;;;
 ;;; site-erlang-mode.el --- Erlang mode.
 ;;;
-;;; Time-stamp: <Tuesday Feb 24, 2015 10:32:35 asmodai>
-;;; Revision:   12
+;;; Time-stamp: <22/12/28 19:43:18 asmodai>
+;;; Revision:   13
 ;;;
-;;; Copyright (c) 2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2012-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

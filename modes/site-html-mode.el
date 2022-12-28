@@ -2,10 +2,10 @@
 ;;;
 ;;; site-html-mode.el --- HTML mode hacks.
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 00:41:37 asmodai>
-;;; Revision:   11
+;;; Time-stamp: <22/12/28 19:43:29 asmodai>
+;;; Revision:   12
 ;;;
-;;; Copyright (c) 2006-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2006-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

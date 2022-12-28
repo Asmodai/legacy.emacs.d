@@ -364,7 +364,7 @@ Here is the full list of keys bound in Folding mode:
       fold-mode-marks-alist)))
 (if fold-marks
     (setq fold-marks (cdr fold-marks))
-  (setq fold-marks '("{{{ " "}}}")))
+  (setq fold-marks '(" {{{ " " }}}")))
 (apply 'fold-set-marks fold-marks)))
   (unwind-protect
       (let ((hook-symbol (intern-soft

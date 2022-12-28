@@ -2,10 +2,10 @@
 ;;;
 ;;; site-lisp-mode.el --- Lisp mode hacks.
 ;;;
-;;; Time-stamp: <Wednesday Feb 11, 2015 07:36:55 asmodai>
-;;; Revision:   34
+;;; Time-stamp: <22/12/28 19:44:26 asmodai>
+;;; Revision:   43
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -308,8 +308,7 @@ text.  Move the cursor to the new line."
   (defun my-interactive-lisp-mode-hooks ()
     (when (or (emacs=20-p)
               (emacs=21-p))
-      (turn-on-font-lock)
-      (font-lock-mode 1))
+      (turn-on-font-lock))
     (when (featurep 'paredit)
       (paredit-mode -1))
     (when (featurep 'company)
@@ -323,7 +322,9 @@ text.  Move the cursor to the new line."
       (semantic-highlight-func-mode -1)
       (semantic-show-unmatched-syntax-mode -1)
       (semantic-stickyfunc-mode -1))
-    (eldoc-mode 1)
+    (when (emacs>=21-p)
+      (eldoc-mode 1))
+    (maybe-font-lock-mode 1)
     (show-paren-mode 1)
     (auto-fill-mode 1))
   
@@ -332,8 +333,7 @@ text.  Move the cursor to the new line."
   (defun my-inferior-lisp-mode-hooks ()
     (when (or (emacs=20-p)
               (emacs=21-p))
-      (turn-on-font-lock)
-      (font-lock-mode 1))
+      (turn-on-font-lock))
     (when (featurep 'paredit)
       (paredit-mode -1))
     (when (featurep 'company)
@@ -347,7 +347,9 @@ text.  Move the cursor to the new line."
       (semantic-highlight-func-mode -1)
       (semantic-show-unmatched-syntax-mode -1)
       (semantic-stickyfunc-mode -1))
-    (eldoc-mode 1)
+    (when (emacs>=21-p)
+      (eldoc-mode 1))
+    (maybe-font-lock-mode 1)
     (show-paren-mode 1))
   
   ;;
@@ -355,8 +357,7 @@ text.  Move the cursor to the new line."
   (defun my-slime-lisp-mode-hooks ()
     (when (or (emacs=20-p)
               (emacs=21-p))
-      (turn-in-font-lock)
-      (font-lock-mode 1))
+      (turn-in-font-lock))
     (when slime-p
       (slime-mode 1))
     (when (featurep 'paredit)
@@ -376,7 +377,9 @@ text.  Move the cursor to the new line."
       (semantic-show-unmatched-syntax-mode -1)
       (semantic-stickyfunc-mode -1))
     (auto-fill-mode 1)
-    (eldoc-mode 1)
+    (when (emacs>=21-p)
+      (eldoc-mode 1))
+    (maybe-font-lock-mode 1)
     (show-paren-mode 1))
   
   ;;
@@ -385,7 +388,7 @@ text.  Move the cursor to the new line."
     (when (or (emacs=20-p)
               (emacs=21-p))
       (turn-in-font-lock)
-      (font-lock-mode 1))
+      (maybe-font-lock-mode 1))
     (when (slime-p)
       (slime-mode 1))
     (when (featurep 'company)
@@ -402,7 +405,8 @@ text.  Move the cursor to the new line."
       (semantic-highlight-func-mode -1)
       (semantic-show-unmatched-syntax-mode -1)
       (semantic-stickyfunc-mode -1))
-    (eldoc-mode 1)
+    (when (emacs>=21-p)
+      (eldoc-mode 1))
     (show-paren-mode 1))
 
   ;;
@@ -410,15 +414,15 @@ text.  Move the cursor to the new line."
   (defun my-lisp-mode-hooks ()
     (when (or (emacs=20-p)
               (emacs=21-p))
-      (turn-on-font-lock)
-      (font-lock-mode 1))
+      (turn-on-font-lock))
     (when (featurep 'paredit)
       (paredit-mode 1))
     (when (featurep 'company)
       (company-mode 1))
     (when (featurep 'highlight-parentheses)
       (hi-parens-autopair))
-    (when (eq major-mode 'emacs-lisp-mode)
+    (when (and (emacs>=21-p)
+               (eq major-mode 'emacs-lisp-mode))
       (eldoc-mode 1))
     (when (featurep 'semantic)
       (ede-minor-mode -1)
@@ -427,8 +431,9 @@ text.  Move the cursor to the new line."
       (semantic-highlight-func-mode -1)
       (semantic-show-unmatched-syntax-mode -1)
       (semantic-stickyfunc-mode -1))
+    (column-number-mode 1)
     (auto-fill-mode 1)
-    (eldoc-mode 1)
+    (maybe-font-lock-mode 1)
     (show-paren-mode 1))
   
   ;;

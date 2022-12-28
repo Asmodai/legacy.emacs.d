@@ -2,11 +2,11 @@
 ;;;
 ;;; 19-template.el --- Emacs 19 template insertion
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 00:47:34 asmodai>
-;;; Revision:   4
+;;; Time-stamp: <22/12/28 19:38:32 asmodai>
+;;; Revision:   9
 ;;;
 ;;; Copyright (c) 1998, 1999 Stefan Hornburg <racke@gundel.han.de>
-;;; Copyright (c) 2011 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -57,8 +57,8 @@
 function found in the first submatch to the replacement before
   inserting.")
 
-(defvar *template-instruction-alist*
-  '(("address" . user-mail-address)
+(defvar *template-instructions-alist*
+  '(("address" . (concat user-mail-address))
     ("basename" . (file-name-sans-extension (buffer-file-basename)))
     ("changelogcap" . (concat (current-time-string)
                        "  "
@@ -148,7 +148,7 @@ the results."
         *template-vars-alist*)
     ;;
     ;; Insert template.
-    (setq result (insert-file-contents file))
+    (setq result (insert-file-contents fspec))
     (setq end (+ begin (car (cdr result))))
     (setq endmarker (copy-marker end))
     ;;
@@ -210,7 +210,7 @@ results."
         (cons (cons name value)
               *template-instructions-alist*)))
 
-(defun initialise-template-bindings ()
+(defun initialize-template-bindings ()
   "Installs global key bindings for the user functions in this
 module."
   (interactive)

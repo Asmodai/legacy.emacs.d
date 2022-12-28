@@ -2,10 +2,10 @@
 ;;;
 ;;; htmlize-symbols.el --- Htmlize symbol hacks
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 00:37:28 asmodai>
-;;; Revision:   29
+;;; Time-stamp: <22/12/28 19:39:44 asmodai>
+;;; Revision:   30
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;; Copyright (c) 2007, Volkan YAZICI <volkan.yazici@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>

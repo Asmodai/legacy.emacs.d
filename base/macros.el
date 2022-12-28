@@ -2,10 +2,10 @@
 ;;;
 ;;; macros.el --- Various macros.
 ;;;
-;;; Time-stamp: <Wednesday Feb  4, 2015 12:36:01 asmodai>
-;;; Revision:   3
+;;; Time-stamp: <22/12/28 19:40:59 asmodai>
+;;; Revision:   4
 ;;;
-;;; Copyright (c) 2015 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2015-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -98,7 +98,6 @@ For example:
     do
       (initialize-template-binding)
       (set 'time-stamp-active t))"
-  (declare (indent 0))
   (let ((%bootstrap-args% nil)
         (%bootstrap-body% nil)
         (%bootstrap-ands% nil)
@@ -115,10 +114,10 @@ For example:
 
 (defmacro %bootstrap-make-cons (thing with)
   `(cons 'progn         
-	 (mapcar (function
-		  (lambda (x)
-		    (list ,thing x)))
-		 ,with)))
+         (mapcar (function
+                  (lambda (x)
+                    (list ,thing x)))
+                 ,with)))
 
 (defun %bootstrap-parse-clause ()
   (let ((word (pop %bootstrap-args%)))
@@ -131,7 +130,7 @@ For example:
        (let ((to-load (pop %bootstrap-args%)))
          (if (not (listp to-load))
              (setq to-load (list to-load)))
-         (push (%bootstrap-make-cons 'compile-load to-load) %bootstrap-body%)))
+         (push (%bootstrap-make-cons 'maybe-compile-load to-load) %bootstrap-body%)))
       ((eq word 'load)
        (let ((to-load (pop %bootstrap-args%)))
          (if (not (listp to-load))

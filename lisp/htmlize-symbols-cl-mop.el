@@ -2,10 +2,10 @@
 ;;;
 ;;; htmlize-symbols-cl-mop.el --- Htmlize Common Lisp MOP hacks
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 01:16:51 asmodai>
-;;; Revision:   10
+;;; Time-stamp: <22/12/28 19:39:04 asmodai>
+;;; Revision:   11
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;; Copyright (c) 2007, Volkan YAZICI <volkan.yazici@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>

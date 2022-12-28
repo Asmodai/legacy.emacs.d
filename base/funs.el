@@ -2,10 +2,10 @@
 ;;;
 ;;; funs.el --- Various utility functions.
 ;;;
-;;; Time-stamp: <Saturday Jan 31, 2015 18:10:27 asmodai>
-;;; Revision:   2
+;;; Time-stamp: <22/12/28 19:40:53 asmodai>
+;;; Revision:   5
 ;;;
-;;; Copyright (c) 2015 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2015-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -35,6 +35,18 @@
 ;;;{{{ Commentary:
 ;;;
 ;;;}}}
+
+;;;==================================================================
+;;;{{{ Utility funcs:
+
+(defun maybe-font-lock-mode (arg)
+  "Maybe set font-lock mode, depending on if we are using a windowing
+system or not."
+  (when (not (terminal-p))
+    (font-lock-mode arg)))
+
+;;;}}}
+;;;==================================================================
 
 ;;;==================================================================
 ;;;{{{ Ported from XEmacs:

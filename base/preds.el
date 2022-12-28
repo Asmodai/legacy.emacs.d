@@ -2,10 +2,10 @@
 ;;;
 ;;; preds.el --- Predicates.
 ;;;
-;;; Time-stamp: <Wednesday Feb  4, 2015 12:36:37 asmodai>
-;;; Revision:   5
+;;; Time-stamp: <22/12/28 19:55:17 asmodai>
+;;; Revision:   8
 ;;;
-;;; Copyright (c) 2015 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2015-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -188,7 +188,8 @@
 (defsubst 256-colour-p ()
   "T if we're running on a terminal or display system capable of
 displaying 256 colours or more."
-  (>= (display-color-cells) 256))
+  (and (fboundp 'display-color-cells)
+       (>= (display-color-cells) 256)))
 
 ;;;}}}
 ;;;==================================================================
@@ -222,13 +223,15 @@ in `system-name'."
 (defmacro define-host (host)
   "Defines a local host.  HOST is the name of the host to define, for
 which we create a predicate named RUNNING-ON-<host>-P."
-  (declare (indent 0))
+  (when (emacs>=21-p)
+    (declare (indent 0)))
   (let* ((host-str (symbol-name host)) 
          (pred (intern (concat "running-on-" host-str "-p")))
          (doc-str (concat "T if Emacs is running on `" host-str "'.")))
-    `(defsubst ,pred ()
-       ,doc-str 
-       (%running-on ,host-str))))
+  (if (and (emacs=19-p)
+           (< emacs-minor-version 34))
+      (list 'defsubst pred '() doc-str (list '%running-on host-str))
+    `(defsubst ,pred () ,doc-str (%running-on ,host-str)))))
 
 ;;;}}}
 ;;;------------------------------------------------------------------
@@ -259,3 +262,10 @@ which we create a predicate named RUNNING-ON-<host>-P."
 ;;;==================================================================
 
 ;;; preds.el ends here
+
+
+
+
+
+
+

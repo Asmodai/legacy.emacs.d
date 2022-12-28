@@ -2,10 +2,10 @@
 ;;;
 ;;; site-ibuffer.el --- ibuffer hacks.
 ;;;
-;;; Time-stamp: <Wednesday Jul 17, 2013 15:23:44 asmodai>
-;;; Revision:   1
+;;; Time-stamp: <22/12/28 19:43:40 asmodai>
+;;; Revision:   2
 ;;;
-;;; Copyright (c) 2013 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2013-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

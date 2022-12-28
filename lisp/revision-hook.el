@@ -2,10 +2,10 @@
 ;;;
 ;;; revision-hook.el --- File revision hook.
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 00:40:32 asmodai>
-;;; Revision:   3
+;;; Time-stamp: <22/12/28 19:40:08 asmodai>
+;;; Revision:   4
 ;;;
-;;; Copyright (c) 2011-12 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

@@ -2,10 +2,10 @@
 ;;;
 ;;; bytecode.el --- Bytecode utilities
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 01:22:33 asmodai>
-;;; Revision:   9
+;;; Time-stamp: <22/12/28 19:40:41 asmodai>
+;;; Revision:   12
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -90,5 +90,13 @@ bytecode, then compile the file and then load the bytecode."
                    el-file
                    file))))
     (load cache-file)))
+
+(defun maybe-compile-load (file)
+  "Loads the given file either via bytecode or the normal way.
+
+To disable all bytecode compilation, set *byte-compile* to NIL."
+  (if (null *byte-compile*)
+      (load file)
+      (compile-load file)))
 
 ;;; bytecode.el ends here

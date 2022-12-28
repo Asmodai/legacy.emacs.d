@@ -2,10 +2,10 @@
 ;;;
 ;;; site-lua-mode.el --- Site Lua hooks.
 ;;;
-;;; Time-stamp: <Sunday Apr 28, 2013 19:05:17 asmodai>
-;;; Revision:   1
+;;; Time-stamp: <22/12/28 19:44:43 asmodai>
+;;; Revision:   2
 ;;;
-;;; Copyright (c) 2013 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2013-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

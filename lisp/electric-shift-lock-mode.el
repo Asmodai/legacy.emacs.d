@@ -2,10 +2,10 @@
 ;;;
 ;;; electric-shift-lock-mode.el --- Electric shift locking, ala ZWEI.
 ;;;
-;;; Time-stamp: <Thursday Aug 30, 2012 08:54:09 asmodai>
-;;; Revision:   5
+;;; Time-stamp: <22/12/28 19:38:52 asmodai>
+;;; Revision:   6
 ;;;
-;;; Copyright (c) 2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2012-2022 Paul Ward <asmodai@gmail.com>
 ;;; Copyright (c) 2008 John Paul Wallington
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>

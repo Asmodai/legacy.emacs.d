@@ -2,10 +2,10 @@
 ;;;
 ;;; perl-reformat.el --- Perl reformatting.
 ;;;
-;;; Time-stamp: <Monday Jul 21, 2014 11:31:48 asmodai>
-;;; Revision:   8
+;;; Time-stamp: <22/12/28 19:40:02 asmodai>
+;;; Revision:   9
 ;;;
-;;; Copyright (c) 2014 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2014-2022 Paul Ward <asmodai@gmail.com>
 ;;; Copyright (C) 2008, Johan Lindstrom
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>

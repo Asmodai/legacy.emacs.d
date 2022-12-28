@@ -2,10 +2,10 @@
 ;;;
 ;;; htmlize-symbols-common-lisp.el --- Htmlize Common Lisp hacks
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 00:39:50 asmodai>
-;;; Revision:   18
+;;; Time-stamp: <22/12/28 19:39:18 asmodai>
+;;; Revision:   19
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;; Copyright (c) 2007, Volkan YAZICI <volkan.yazici@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>

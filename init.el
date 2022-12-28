@@ -2,10 +2,10 @@
 ;;;
 ;;; init.el --- Emacs initialisation file.
 ;;;
-;;; Time-stamp: <Wednesday Feb  4, 2015 13:34:07 asmodai>
-;;; Revision:   129
+;;; Time-stamp: <22/12/28 19:42:22 asmodai>
+;;; Revision:   152
 ;;;
-;;; Copyright (c) 2005-2015 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2005-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -37,6 +37,8 @@
 ;;; NOTICE:  This file is never bytecompiled.
 ;;;
 ;;; Emacsen this has been tested on:
+;;;   GNU Emacs 19.34.1      NeXTSTEP 3.3
+;;;   GNU Emacs 19.34.3      Digital UNIX 4.0
 ;;;   GNU Emacs 22.1.1       Mac OS X 10.5.8
 ;;;   GNU Emacs 23.1.1       GNU/Linux
 ;;;   GNU Emacs 23.2.3       Windows 7
@@ -67,6 +69,9 @@
 
 ;;; Copy this at your peril.
 (setq inhibit-startup-echo-area-message "asmodai")
+
+;;; Set this to a non-NIL value to enable bytecode compiling.
+(setq *byte-compile* nil)
 
 ;;;}}}
 ;;;==================================================================
@@ -282,10 +287,10 @@ version.")
 (compile-load "bytecode")
 
 ;;; Now compile and load most of the base system.
-(compile-load "preds")
-(compile-load "funs")
-(compile-load "macros")
-(compile-load "fixes")
+(maybe-compile-load "preds")
+(maybe-compile-load "funs")
+(maybe-compile-load "macros")
+(maybe-compile-load "fixes")
 
 ;;;}}}
 ;;;------------------------------------------------------------------
@@ -458,15 +463,22 @@ version.")
 (load custom-file)
 
 ;;; Load our custom key bindings.
-(compile-load "bindings")
+(maybe-compile-load "bindings")
 
 ;;; Load in our custom variables.
-(compile-load "settings")
+(maybe-compile-load "settings")
 
 ;;; Load our theme last, so we can clobber anything that might be in
 ;;; the custom file.
 (when (emacs-version>= 19 0)
-  (compile-load "theme"))
+  (maybe-compile-load "theme"))
+
+;;; Set up emacs for windowing systems.
+(when (not (terminal-p))
+  (load "19-windowing")
+  (global-font-lock-mode t)
+  (add-hook 'emacs-startup-hook 'configure-emacs-graphics))
+
 
 ;;; One or two packages require this to be non-void.
 (setf stack-trace-on-error nil)
@@ -478,3 +490,6 @@ version.")
 ;;;==================================================================
 
 ;;; init.el ends here.
+
+
+(put 'eval-expression 'disabled nil)

@@ -2,10 +2,10 @@
 ;;;
 ;;; theme.el --- Emacs colour theme.
 ;;;
-;;; Time-stamp: <Monday Feb  2, 2015 05:57:05 asmodai>
-;;; Revision:   110
+;;; Time-stamp: <22/12/28 19:41:18 asmodai>
+;;; Revision:   112
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>
@@ -41,17 +41,20 @@
 ;;; ==================================================================
 ;;;{{{ Basic UI elements:
 
-(when (fboundp 'set-background-color)
-  (set-background-color "black"))
+;;; Emacs on NeXTSTEP has all this written to the defaults database
 
-(when (fboundp 'set-cursor-color)
-  (set-cursor-color "green3"))
+(when (not (next-mach-p))
+  (when (fboundp 'set-background-color)
+    (set-background-color "black"))
 
-(when (fboundp 'set-foreground-color)
-  (set-foreground-color "white"))
+  (when (fboundp 'set-cursor-color)
+    (set-cursor-color "green3"))
 
-(when (fboundp 'set-border-color)
-  (set-border-color "black"))
+  (when (fboundp 'set-foreground-color)
+    (set-foreground-color "white"))
+
+  (when (fboundp 'set-border-color)
+    (set-border-color "black")))
 
 ;;;}}}
 ;;; ==================================================================
@@ -231,7 +234,7 @@
        (:background "#2b113d"
         :foreground "#b8b66c"
         ;:box (:line-width 1 :color "#230b2f" :style released-button)
-	))
+        ))
       (((type tty))
        (:background "red"
         :foreground "white"))))
@@ -243,7 +246,7 @@
        (:background "#160a1e"
         :foreground "#51502f"
         ;:box (:line-width 1 :color "#230b2f" :style released-button)
-	))
+        ))
       (((type tty))
        (:background "blue"
         :foreground "yellow"))))

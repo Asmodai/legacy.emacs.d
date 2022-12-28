@@ -2,10 +2,10 @@
 ;;;
 ;;; doc-mode.el --- Doxygen mode.
 ;;;
-;;; Time-stamp: <Saturday Jun  1, 2013 04:08:41 asmodai>
-;;; Revision:   7
+;;; Time-stamp: <22/12/28 19:38:45 asmodai>
+;;; Revision:   8
 ;;;
-;;; Copyright (c) 2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2012-2022 Paul Ward <asmodai@gmail.com>
 ;;; Copyright (C) 2007, 2009 Nikolaj Schumacher
 ;;;
 ;;; Based on code written by Nikolaj Schumacher <bugs * nschum de>

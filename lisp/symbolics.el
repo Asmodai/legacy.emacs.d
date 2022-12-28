@@ -2,10 +2,10 @@
 ;;;
 ;;; symbolics.el --- Symbolics keyboard
 ;;;
-;;; Time-stamp: <Wednesday Sep  5, 2012 19:11:47 asmodai>
-;;; Revision:   69
+;;; Time-stamp: <22/12/28 19:40:16 asmodai>
+;;; Revision:   70
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

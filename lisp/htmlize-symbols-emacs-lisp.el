@@ -2,10 +2,10 @@
 ;;;
 ;;; htmlize-symbols-emacs-lisp.el --- Htmlize Emacs Lisp hacks
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 00:38:44 asmodai>
-;;; Revision:   19
+;;; Time-stamp: <22/12/28 19:39:36 asmodai>
+;;; Revision:   20
 ;;;
-;;; Copyright (c) 2011-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2011-2022 Paul Ward <asmodai@gmail.com>
 ;;; Copyright (c) 2007, Volkan YAZICI <volkan.yazici@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>

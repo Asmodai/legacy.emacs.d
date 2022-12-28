@@ -2,10 +2,10 @@
 ;;;
 ;;; toolbar.el --- Toolbar hacks
 ;;;
-;;; Time-stamp: <Sunday Jan 29, 2012 00:50:45 asmodai>
-;;; Revision:   2
+;;; Time-stamp: <22/12/28 19:49:47 asmodai>
+;;; Revision:   3
 ;;;
-;;; Copyright (c) 2005-2012 Paul Ward <asmodai@gmail.com>
+;;; Copyright (c) 2005-2022 Paul Ward <asmodai@gmail.com>
 ;;;
 ;;; Author:     Paul Ward <asmodai@gmail.com>
 ;;; Maintainer: Paul Ward <asmodai@gmail.com>

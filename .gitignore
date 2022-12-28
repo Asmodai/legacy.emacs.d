@@ -6,3 +6,4 @@
 /**/*.bak
 /auto-save-list
 /cache/**/*
+/custom/**/*
